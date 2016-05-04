@@ -1,16 +1,17 @@
 #!/usr/bin/env bash -e
+# Source this
 
 case "$(uname)" in
   Darwin)
-    subl_prefix="~/Library/Application Support/Sublime Text 3"
+    subl_prefix="${HOME}/Library/Application Support/Sublime Text 3"
     ;;
   *)
-    subl_prefix="~/.config/sublime-text-3"
+    subl_prefix="${HOME}/.config/sublime-text-3"
     ;;
 esac
 
 subl_installed_pkgs="${subl_prefix}/Installed Packages"
-subl_pkgs="${subl_prefix}/Package"
+subl_pkgs="${subl_prefix}/Packages"
 
 
 err() { echo "$@" &2; }
@@ -22,8 +23,8 @@ check-subl() {
   fi
 }
 
-mk-pkg() {
-
+subl.bundle-pkg()
+{
   pkg_src="$1"
   pkg_file="$2"
 
@@ -38,7 +39,12 @@ mk-pkg() {
   cd -
 }
 
-install-pkg()
+subl.is-pkg()
+{
+  [[ -f "./${1}/package-metadata.json" ]]
+}
+
+subl.install()
 {
   pkg="$1"
 
@@ -51,7 +57,7 @@ install-pkg()
   echo "Installed $pkg"
 }
 
-dev-link-pkg()
+subl.dev-link()
 {
   pkg_dir="$1"
 
@@ -59,12 +65,39 @@ dev-link-pkg()
     err "$pkg_dir should be a folder"
     return 1
   fi
-
-  ln -s "$pkg_dir" "${subl_pkgs}/${pkg_dir}"
+  ln -s "${PWD}/$pkg_dir" "${subl_pkgs}/"
 }
 
-for pkg in ./*; do
-  if [[ -d "$pkg" ]]; then
-    echo "-> $pkg"
+subl.list()
+{
+  echo "Found the following pacakges here: "
+  for pkg in ./*; do
+    if subl.is-pkg "$pkg" ; then
+      echo "-> $pkg"
+    fi
+  done
+}
+
+
+subl.new()
+{
+  pkg_name="$1"
+  pkg_metadata="${pkg_name}/package-metadata.json"
+
+  if [[ -z $pkg_name ]]; then
+    err "Specify a package name"
+    return 1
   fi
-done
+
+  if [[ -d "$pkg_name" ]]; then
+    err "A folder with that name already exists"
+    return 1
+  fi
+
+  mkdir "./$pkg_name"
+  echo "{\"version\":\"0.0.1\",\"description\":\"...\"}" > "$pkg_metadata"
+  echo "Created $pkg_name"
+}
+
+echo "Soured sublime dev commands prefixed with subl."
+echo "Pakcages root: $subl_prefix"
