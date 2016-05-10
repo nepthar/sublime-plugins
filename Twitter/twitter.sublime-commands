@@ -1,0 +1,10 @@
+[
+  { "caption": "Project: Organize folders", "command": "twitter_organize_folders" },
+  { "caption": "Project: Remove folder", "command": "twitter_remove_folder" },
+  { "caption": "Project: Add folder", "command": "twitter_always_disable" },
+
+  { "caption": "Source: New Source pants project", "command": "twitter_new_pants_project"},
+  { "caption": "Source: Add folder to project", "command": "twitter_add_folder" },
+  { "caption": "Source: Add pants dependencies", "command": "twitter_add_pants_dependencies" },
+  { "caption": "Source: List pants dependencies", "command": "twitter_list_pants_dependencies" }
+]

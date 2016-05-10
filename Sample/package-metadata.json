@@ -1,0 +1,8 @@
+{
+  "dependencies": [],
+  "url": "https://github.com/test-account/Test-Plugin",
+  "version": "A.B.C",
+  "sublime_text": ">=3000",
+  "platforms": ["*"],
+  "description": "This is just a sample package"
+}

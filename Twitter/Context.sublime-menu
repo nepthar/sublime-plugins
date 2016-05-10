@@ -1,0 +1,11 @@
+[
+  { "caption": "-", "id": "file" },
+  {
+    "caption": "Source",
+    "children":
+    [
+      { "id": "Source", "caption": "Copy Cgit Link", "command": "twitter_copy_cgit_link" },
+      { "id": "Source", "caption": "Copy Sourcegraph Link", "command": "twitter_copy_sourcegraph_link"}
+    ]
+  }
+]

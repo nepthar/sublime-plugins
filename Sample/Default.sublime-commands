@@ -1,0 +1,10 @@
+[
+    {
+        "caption": "Sample: panel test",
+        "command": "panel_test"
+    },
+    {
+        "caption": "Colorsublime: Browse Themes",
+        "command": "browse"
+    }
+]
