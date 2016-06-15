@@ -175,6 +175,10 @@ class BuildTarget:
     self.dependencies = deps
     self.sources = sources
 
+  def is_toplvl(self):
+    """ A "top level" build target is one which in not in a */src/* folder. """
+    return not self.tid.contains("/src/")
+
 
 class BuildFile:
   """ Result of parsing a build file """

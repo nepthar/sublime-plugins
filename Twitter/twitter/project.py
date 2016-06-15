@@ -33,10 +33,8 @@ class Folder:
 
 
 class ProjectFolders:
-  def __init__(self, window):
-    self.window = window
-    self.data = window.project_data()
-    self.folders = [Folder(**f) for f in self.data['folders']]
+  def __init__(self, folder_list):
+    self.folders = [Folder(**f) for f in folder_list]
 
   def add_path(self, path, name=None, index=0):
     self.add_folder(Folder(path, name), index)
@@ -68,6 +66,5 @@ class ProjectFolders:
     result.extend(sorted(current))
     self.folders = result
 
-  def write(self):
-    self.data['folders'] = [f.data() for f in self.folders]
-    self.window.set_project_data(self.data)
+  def data(self):
+    return [f.data() for f in self.folders]
